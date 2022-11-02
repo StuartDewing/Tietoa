@@ -28,12 +28,14 @@ namespace Tietoa.Controllers
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            //PlayerReponse playerResponse = JsonConvert.DeserializeObject<PlayerReponse>(responseString);
-            PlayerResponse myDeserializedClass = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
+            PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
             PlayerDto playerDto = new PlayerDto
             {
-                FirstName = myDeserializedClass.[0].Person.firstName
-       
+                FirstName = playerResponse.people[0].firstName,
+                LastName = playerResponse.people[0].lastName,
+                Team = playerResponse.people[0].currentTeam.name,
+                Position = playerResponse.people[0].primaryPosition.name,
+                PlayerNumber = playerResponse.people[0].primaryNumber
             };
             return playerDto;
         }
