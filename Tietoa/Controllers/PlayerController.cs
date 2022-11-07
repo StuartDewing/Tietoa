@@ -1,9 +1,7 @@
-﻿using Tietoa.Models.Player;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
-using static Tietoa.Models.Player.PlayerReponse;
-using static Tietoa.Models.Player.PlayerDto;
+using Tietoa.Models.Player;
+using Tietoa.Models.Player.JsonClasses;
 
 namespace Tietoa.Controllers
 {
@@ -22,13 +20,22 @@ namespace Tietoa.Controllers
         [HttpGet]
         public async Task<PlayerDto> Get()
         {
-
-            var URL = $"https://statsapi.web.nhl.com/api/v1/people/8478007"; //ID8478007 = Elvis Merzlikins
-            var response = await _httpClient.GetAsync(URL);
+            var playerId = 8478007;  //ID8478007 = Elvis Merzlikins
+            var url = $"https://statsapi.web.nhl.com/api/v1/people/{playerId}";
+            var response = await _httpClient.GetAsync(url);
 
             var responseString = await response.Content.ReadAsStringAsync();
 
             PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
+
+
+
+
+
+
+
+
+
             PlayerDto playerDto = new PlayerDto
             {
                 FirstName = playerResponse.people[0].firstName,
