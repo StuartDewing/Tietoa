@@ -1,6 +1,6 @@
 ﻿namespace Tietoa.Models.Teams
 {
-    public class TeamsDto
+    public class TeamDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

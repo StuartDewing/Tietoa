@@ -18,8 +18,20 @@ namespace Tietoa.Controllers
         }
 
         [HttpGet]
-        public async Task<PlayerDto> Get()
+        //public async Task<IActionResult> Get(int id)
+        public async Task<PlayerDto> Get(int id)
+
         {
+            //if (id == 0)
+            //    return BadRequest("Player id missing");
+
+            //var player = _playerService.get(playerId);
+            //if (player == null)
+            //    return NotFound();
+
+            //return Ok(player);
+
+            // refactor to be a service (A)
             var playerId = 8478007;  //ID8478007 = Elvis Merzlikins
             var url = $"https://statsapi.web.nhl.com/api/v1/people/{playerId}";
             var response = await _httpClient.GetAsync(url);
@@ -28,14 +40,7 @@ namespace Tietoa.Controllers
 
             PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
 
-
-
-
-
-
-
-
-
+            // refactor to be a service (B)
             PlayerDto playerDto = new PlayerDto
             {
                 FirstName = playerResponse.people[0].firstName,
