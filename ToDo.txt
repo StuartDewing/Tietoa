@@ -1,0 +1,13 @@
+Team Controller
+	- Add AutoMapper
+	- Register dependency | Dependency Injection
+	- Add IF Statement to Action
+
+PlayerController
+	- IActionResult return type
+    - return BadRequest("Player id missing")
+    - return NotFound();
+    - return Ok(player);
+    - Add Parameter to Action
+    - Refactor request to be a service
+    - Refactor Dto Mapping to be a service
