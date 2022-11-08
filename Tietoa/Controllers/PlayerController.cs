@@ -18,12 +18,10 @@ namespace Tietoa.Controllers
         }
 
         [HttpGet]
-        //public async Task<IActionResult> Get(int id)
-        public async Task<PlayerDto> Get(int id)
-
+        public async Task<IActionResult> Get(int id) //8478007 = Elvis Merzlikins
         {
-            //if (id == 0)
-            //    return BadRequest("Player id missing");
+            if (id == 0)
+                return BadRequest("Player id missing");
 
             //var player = _playerService.get(playerId);
             //if (player == null)
@@ -31,16 +29,14 @@ namespace Tietoa.Controllers
 
             //return Ok(player);
 
-            // refactor to be a service (A)
-            var playerId = 8478007;  //ID8478007 = Elvis Merzlikins
-            var url = $"https://statsapi.web.nhl.com/api/v1/people/{playerId}";
+            var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
             var response = await _httpClient.GetAsync(url);
-
             var responseString = await response.Content.ReadAsStringAsync();
-
             PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
 
-            // refactor to be a service (B)
+            if (playerResponse.people[0].firstName == null)
+                return BadRequest("Invalid player id");
+
             PlayerDto playerDto = new PlayerDto
             {
                 FirstName = playerResponse.people[0].firstName,
@@ -49,8 +45,7 @@ namespace Tietoa.Controllers
                 Position = playerResponse.people[0].primaryPosition.name,
                 PlayerNumber = playerResponse.people[0].primaryNumber
             };
-            return playerDto;
+            return Ok(playerDto);
         }
-
     }
 }
