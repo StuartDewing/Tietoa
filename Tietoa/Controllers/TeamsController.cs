@@ -15,23 +15,18 @@ namespace Tietoa.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int Id)
         {
-            // Add AutoMapper
-            
+
             var url = $"https://statsapi.web.nhl.com/api/v1/teams";
             var response = await _httpClient.GetAsync(url);
-
             var responseString = await response.Content.ReadAsStringAsync();
 
             var root = JsonConvert.DeserializeObject<Root>(responseString);
             List<TeamDto> teamsDto = new List<TeamDto>();
-            //root.teams.Count
+
             foreach (var t in root.teams) 
             {
-                //if (root.teams > 12) {
-                //}
                 teamsDto.Add(new TeamDto { Id = t.id, Name = t.name });
             }
-            //register depency | DI
 
             return Ok(teamsDto);
         }

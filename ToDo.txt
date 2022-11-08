@@ -1,6 +1,7 @@
+- Register dependency | Dependency Injection
+
 Team Controller
 	- Add AutoMapper
-	- Register dependency | Dependency Injection
 	- Add IF Statement to Action
 
 PlayerController
