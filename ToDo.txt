@@ -1,11 +1,15 @@
 - Register dependency | Dependency Injection
+- Add IF Statement to Action
 
 Team Controller
 	- Add AutoMapper
-	- Add IF Statement to Action
-
+	
 PlayerController
 All Remaining are service based
     - return NotFound();
     - Refactor request to be a service
     - Refactor Dto Mapping to be a service
+
+Matt Notes:
+   - That service method needs to be public not private.
+   - Separately as you are not yet using DI, you'll need to new up the service in your controller, and remove the static from the method
