@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Tietoa.Models.Player;
-using Tietoa.Models.Player.JsonClasses; 
+﻿using /Microsoft.AspNetCore.Mvc;
+using /Newtonsoft.Json;
+using /Tietoa.Models.Player;
+using Tietoa.Models.Player.JsonClasses;
 
 namespace Services.Player
 {
