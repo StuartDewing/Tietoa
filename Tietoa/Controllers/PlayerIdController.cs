@@ -8,12 +8,12 @@ namespace Tietoa.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PlayerController : ControllerBase
+    public class PlayerIdController : ControllerBase
     {
-        private readonly ILogger<PlayerController> _logger;
+        private readonly ILogger<PlayerIdController> _logger;
         private static HttpClient _httpClient = new HttpClient();
 
-        public PlayerController(ILogger<PlayerController> logger)
+        public PlayerIdController(ILogger<PlayerIdController> logger)
         {
             _logger = logger;
         }
