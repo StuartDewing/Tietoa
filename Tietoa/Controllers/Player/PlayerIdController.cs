@@ -45,7 +45,6 @@ namespace Tietoa.Controllers.Player
                 Position = playerResponse.people[0].primaryPosition.name,
                 PlayerNumber = playerResponse.people[0].primaryNumber
             };
-
             return Ok(playerDto);
         }
     }
