@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Tietoa.Models.Draft;
 using Tietoa.Models.Draft.JsonClasses;
 
+
 namespace Tietoa.Controllers.Draft
 {
     [ApiController]
@@ -29,11 +30,11 @@ namespace Tietoa.Controllers.Draft
             var root = JsonConvert.DeserializeObject<Root>(responseJson);
 
             List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
-            foreach (var r in root.drafts)
+            foreach (var d in root.drafts)
             {
-                foreach (var ro in r.rounds)
+                foreach (var r in d.rounds)
                 {
-                    foreach (var p in ro.picks.Where(t => t.team.name == team))
+                    foreach (var p in r.picks.Where(t => t.team.name == team))
                     {
                         draftByYears.Add(new DraftByYearDto
                         {

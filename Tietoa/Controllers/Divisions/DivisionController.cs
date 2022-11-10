@@ -2,8 +2,9 @@
 using Newtonsoft.Json;
 using Tietoa.Models.Divisions;
 using Tietoa.Models.Divisions.JsonClasses;
-
 namespace Tietoa.Controllers.Divisions
+
+
 {
     [ApiController]
     [Route("[controller]")]
@@ -22,19 +23,19 @@ namespace Tietoa.Controllers.Divisions
         {
             var url = $"https://statsapi.web.nhl.com/api/v1/divisions";
             var response = await _httpClient.GetAsync(url);
-            var responseString = await response.Content.ReadAsStringAsync();
-            var root = JsonConvert.DeserializeObject<Root>(responseString);
+            var ResponseJson = await response.Content.ReadAsStringAsync();
+            var root = JsonConvert.DeserializeObject<Root>(ResponseJson);
 
             List<DivisionsDto> divisions = new List<DivisionsDto>();
-            foreach (var r in root.divisions)
+            foreach (var d in root.divisions)
             {
-                if (r.active == true) 
+                if (d.active == true) 
                 {
                     divisions.Add(new DivisionsDto
                     {
-                        Id = r.id,
-                        Name = r.name,
-                        Conference = r.conference.name
+                        Id = d.id,
+                        Name = d.name,
+                        Conference = d.conference.name
                     });
                 }   
             }

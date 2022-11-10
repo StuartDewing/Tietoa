@@ -26,9 +26,9 @@ namespace Tietoa.Controllers.Player
 
             var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
             var response = await _httpClient.GetAsync(url);
-            var responseString = await response.Content.ReadAsStringAsync();
+            var responseJson = await response.Content.ReadAsStringAsync();
 
-            PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseString);
+            PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseJson);
 
 
             // Bug for invalid player id

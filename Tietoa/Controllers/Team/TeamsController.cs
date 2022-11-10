@@ -17,8 +17,8 @@ namespace Tietoa.Controllers.Team
         {
             var url = $"https://statsapi.web.nhl.com/api/v1/teams";
             var response = await _httpClient.GetAsync(url);
-            var responseString = await response.Content.ReadAsStringAsync();
-            var root = JsonConvert.DeserializeObject<Root>(responseString);
+            var responseJson = await response.Content.ReadAsStringAsync();
+            var root = JsonConvert.DeserializeObject<Root>(responseJson);
             
             List<TeamDto> teamsDto = new List<TeamDto>();
             foreach (var t in root.teams)
