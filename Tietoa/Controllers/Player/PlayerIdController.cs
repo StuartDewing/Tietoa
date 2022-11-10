@@ -4,7 +4,7 @@ using Tietoa.Models.Player;
 using Tietoa.Models.Player.JsonClasses;
 
 
-namespace Tietoa.Controllers
+namespace Tietoa.Controllers.Player
 {
     [ApiController]
     [Route("[controller]")]
@@ -23,8 +23,8 @@ namespace Tietoa.Controllers
         {
             if (id == 0)
                 return BadRequest("Player id missing");
-                               
-            var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}"; 
+
+            var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
             var response = await _httpClient.GetAsync(url);
             var responseString = await response.Content.ReadAsStringAsync();
 

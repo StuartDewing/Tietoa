@@ -4,14 +4,14 @@ using Tietoa.Models.Player.JsonClasses;
 using Tietoa.Models.Teams;
 using Tietoa.Models.Teams.JsonClasses;
 
-namespace Tietoa.Controllers
+namespace Tietoa.Controllers.Team
 {
     [ApiController]
     [Route("[controller]")]
     public class TeamsController : ControllerBase
     {
         private static HttpClient _httpClient = new HttpClient();
-        
+
         [HttpGet]
         public async Task<IActionResult> Index(int Id)
         {
@@ -23,7 +23,7 @@ namespace Tietoa.Controllers
             var root = JsonConvert.DeserializeObject<Root>(responseString);
             List<TeamDto> teamsDto = new List<TeamDto>();
 
-            foreach (var t in root.teams) 
+            foreach (var t in root.teams)
             {
                 teamsDto.Add(new TeamDto { Id = t.id, Name = t.name });
             }

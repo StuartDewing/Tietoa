@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Tietoa.Models.Draft;
 using Tietoa.Models.Draft.JsonClasses;
 
-namespace Tietoa.Controllers
+namespace Tietoa.Controllers.Draft
 {
     [ApiController]
     [Route("[controller]")]
@@ -18,7 +18,7 @@ namespace Tietoa.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int year, string team) 
+        public async Task<IActionResult> Index(int year, string team)
         {
             if (year == 0)
                 return BadRequest("Draft year missing");
@@ -31,7 +31,7 @@ namespace Tietoa.Controllers
             List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
             foreach (var r in root.drafts)
             {
-                foreach (var ro in r.rounds) 
+                foreach (var ro in r.rounds)
                 {
                     foreach (var p in ro.picks.Where(t => t.team.name == team))
                     {
@@ -43,7 +43,7 @@ namespace Tietoa.Controllers
                             FullName = p.prospect.fullName
                         });
                     }
-                } 
+                }
             }
             return Ok(draftByYears);
         }
