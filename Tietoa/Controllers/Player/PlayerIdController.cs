@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Tietoa.Models.Player;
-using Tietoa.Models.Player.JsonClasses;
+using Services.Player;
+using Tietoa.Domain.Models.Player;
+using Tietoa.Domain.Models.Player.JsonClasses;
 
 
 namespace Tietoa.Controllers.Player
@@ -24,12 +25,13 @@ namespace Tietoa.Controllers.Player
             if (id == 0)
                 return BadRequest("Player id missing");
 
-            var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
-            var response = await _httpClient.GetAsync(url);
-            var responseJson = await response.Content.ReadAsStringAsync();
+            //var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
+            //var response = await _httpClient.GetAsync(url);
+            //var responseJson = await response.Content.ReadAsStringAsync();
 
-            PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseJson);
-
+            //PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseJson);
+            GetPlayer d = new GetPlayer();
+            PlayerResponse playerResponse = await d.DownloadPlayer(id);
 
             // Bug for invalid player id
             //if (playerResponse.people[0].firstName == null)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Tietoa.Models.Divisions;
-using Tietoa.Models.Divisions.JsonClasses;
+using Tietoa.Domain.Models.Divisions;
+using Tietoa.Domain.Models.Divisions.JsonClasses;
 namespace Tietoa.Controllers.Divisions
 
 

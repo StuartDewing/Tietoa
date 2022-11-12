@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Tietoa.Models.Draft;
-using Tietoa.Models.Draft.JsonClasses;
+using Tietoa.Domain.Models.Draft;
+using Tietoa.Domain.Models.Draft.JsonClasses;
 
 
 namespace Tietoa.Controllers.Draft

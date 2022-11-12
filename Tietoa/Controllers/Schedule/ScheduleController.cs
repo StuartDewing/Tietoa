@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Tietoa.Models.Schedule;
-using Tietoa.Models.Schedule.JsonClasses;
+using Tietoa.Domain.Models.Schedule;
+using Tietoa.Domain.Models.Schedule.JsonClasses;
 
 
 namespace Tietoa.Controllers.Schedule
