@@ -11,7 +11,6 @@ namespace Tietoa.Controllers.Draft
     public class DraftYearTeamController : ControllerBase
     {
         private readonly ILogger<DraftYearController> _logger;
-        private static HttpClient _httpClient = new HttpClient();
 
         public DraftYearTeamController(ILogger<DraftYearController> logger)
         {

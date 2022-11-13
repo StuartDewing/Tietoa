@@ -11,7 +11,6 @@ namespace Tietoa.Controllers.Divisions
     public class DivisionController : ControllerBase
     {
         private readonly ILogger<DivisionController> _logger;
-        private static HttpClient _httpClient = new HttpClient();
 
         public DivisionController(ILogger<DivisionController> logger)
         {

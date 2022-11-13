@@ -11,7 +11,6 @@ namespace Tietoa.Controllers.Schedule
     public class ScheduleController : ControllerBase
     {
         private readonly ILogger<ScheduleController> _logger;
-        private static HttpClient _httpClient = new HttpClient();
 
         public ScheduleController(ILogger<ScheduleController> logger)
         {
