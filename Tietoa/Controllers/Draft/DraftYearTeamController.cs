@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Services.GetRequest;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
-
 
 namespace Tietoa.Controllers.Draft
 {
@@ -21,13 +21,14 @@ namespace Tietoa.Controllers.Draft
         [HttpGet]
         public async Task<IActionResult> Index(int year, string team)
         {
-            if (year == 0)
+            if (year == 0 )
                 return BadRequest("Draft year missing");
+            if (team == null)
+                return BadRequest("Team name missing");
 
+            GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
-            var response = await _httpClient.GetAsync(url);
-            var responseJson = await response.Content.ReadAsStringAsync();
-            var root = JsonConvert.DeserializeObject<Root>(responseJson);
+            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
 
             List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
             foreach (var d in root.drafts)

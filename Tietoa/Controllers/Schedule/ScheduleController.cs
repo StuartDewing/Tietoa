@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Services.GetRequest;
 using Tietoa.Domain.Models.Schedule;
 using Tietoa.Domain.Models.Schedule.JsonClasses;
-
 
 namespace Tietoa.Controllers.Schedule
 {
@@ -21,10 +21,9 @@ namespace Tietoa.Controllers.Schedule
         [HttpGet]
         public async Task<IActionResult> Get()
         {
+            GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/schedule";
-            var response = await _httpClient.GetAsync(url);
-            var responseJson = await response.Content.ReadAsStringAsync();
-            var root = JsonConvert.DeserializeObject<Root>(responseJson);
+            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
 
             List<ScheduleDto> schedules = new List<ScheduleDto>();
             foreach (var d in root.dates)

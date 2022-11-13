@@ -4,7 +4,6 @@ using Services.GetRequest;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
 
-
 namespace Tietoa.Controllers.Draft
 {
     [ApiController]
@@ -25,21 +24,9 @@ namespace Tietoa.Controllers.Draft
             if (year == 0)
                 return BadRequest("Draft year missing");
 
-
-
-
-
-            var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
             GetRequest response = new GetRequest();
-                 
-
-            //var response = await _httpClient.GetAsync(url);
-            //var responseJson = await response.Content.ReadAsStringAsync();
-
-
-            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url));
-
-
+            var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
+            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
 
             List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
             foreach (var d in root.drafts)
