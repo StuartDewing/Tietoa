@@ -1,5 +1,3 @@
-- Register dependency | Dependency Injection
-
 Team Controller
 	- Add AutoMapper
 	- Add IF Statement to Action
@@ -7,5 +5,4 @@ Team Controller
 PlayerController
 All Remaining are service based
     - return NotFound();
-    - Refactor request to be a service
     - Refactor Dto Mapping to be a service

@@ -25,19 +25,10 @@ namespace Tietoa.Controllers.Player
             if (id == 0)
                 return BadRequest("Player id missing");
 
-            //var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
-            //var response = await _httpClient.GetAsync(url);
-            //var responseJson = await response.Content.ReadAsStringAsync();
+            GetPlayer response = new GetPlayer();
+            PlayerResponse playerResponse = await response.DownloadPlayer(id);
 
-            //PlayerResponse playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(responseJson);
-            GetPlayer d = new GetPlayer();
-            PlayerResponse playerResponse = await d.DownloadPlayer(id);
-
-            // Bug for invalid player id
-            //if (playerResponse.people[0].firstName == null)
-            //{
-            //    return BadRequest("Invalid player id");
-            //}
+            // TODO: Bug for invalid player id
 
             PlayerDto playerDto = new PlayerDto
             {

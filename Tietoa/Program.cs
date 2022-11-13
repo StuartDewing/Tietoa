@@ -1,4 +1,5 @@
 using Services.Player;
+using Services.GetRequest;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
     x.AddScoped<IGetPlayer, GetPlayer>();
+});
+builder.Host.ConfigureServices(x => {
+    x.AddScoped<IGetRequest, GetRequest>();
 });
 var app = builder.Build();
 
