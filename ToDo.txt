@@ -1,8 +1,13 @@
 Team Controller
 	- Add AutoMapper
-	- Add IF Statement to Action
 
 PlayerController
-All Remaining are service based
     - return NotFound();
-    - Refactor Dto Mapping to be a service
+
+TODO From Matt 
+	- Constructor Injection - C# .Net 6
+		-- AuditLevelService.cs
+		-- AuditLevelController.cs
+		-- DependencyInjection.cs
+	- Unit Test
+

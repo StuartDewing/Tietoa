@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Services.GetRequest;
 using Services.Player;
 using Tietoa.Domain.Models.Player;
 using Tietoa.Domain.Models.Player.JsonClasses;
@@ -25,8 +26,11 @@ namespace Tietoa.Controllers.Player
             if (id == 0)
                 return BadRequest("Player id missing");
 
-            GetPlayer response = new GetPlayer();
-            PlayerResponse playerResponse = await response.DownloadPlayer(id);
+           // GetPlayer response = new GetPlayer();
+            GetRequest response = new GetRequest();
+            var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
+            var playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(response.DownloadResponse(url).Result);
+       
 
             // TODO: Bug for invalid player id
 
