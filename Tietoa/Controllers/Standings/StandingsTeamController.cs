@@ -11,18 +11,20 @@ namespace Tietoa.Controllers.Standings
     public class StandingsTeamController : ControllerBase
     {
         private readonly ILogger<StandingsTeamController> _logger;
+        private readonly IGetRequest _GetRequest;
 
-        public StandingsTeamController(ILogger<StandingsTeamController> logger)
+        public StandingsTeamController(ILogger<StandingsTeamController> logger, IGetRequest getRequest)
         {
             _logger = logger;
+            _GetRequest = getRequest;   
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(string team)
         {
-            GetRequest response = new GetRequest();
+            //GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/standings";
-            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
+            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
             List<StandingsDto> standings = new List<StandingsDto>();
             foreach (var r in root.records) 

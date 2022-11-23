@@ -13,7 +13,7 @@ namespace Tietoa.Controllers.Player
     public class PlayerIdController : ControllerBase
     {
         private readonly ILogger<PlayerIdController> _logger;
-        private static HttpClient _httpClient = new HttpClient();
+        private readonly IGetRequest _GetRequest;
 
         public PlayerIdController(ILogger<PlayerIdController> logger)
         {
@@ -26,12 +26,9 @@ namespace Tietoa.Controllers.Player
             if (id == 0)
                 return BadRequest("Player id missing");
 
-           // GetPlayer response = new GetPlayer();
-            GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
-            var playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(response.DownloadResponse(url).Result);
+            var playerResponse = JsonConvert.DeserializeObject<PlayerResponse>(_GetRequest.DownloadResponse(url).Result);
        
-
             // TODO: Bug for invalid player id
 
             PlayerDto playerDto = new PlayerDto

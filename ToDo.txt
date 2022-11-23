@@ -3,11 +3,3 @@ Team Controller
 
 PlayerController
     - return NotFound();
-
-TODO From Matt 
-	- Constructor Injection - C# .Net 6
-		-- AuditLevelService.cs
-		-- AuditLevelController.cs
-		-- DependencyInjection.cs
-	- Unit Test
-

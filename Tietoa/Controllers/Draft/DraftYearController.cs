@@ -11,10 +11,12 @@ namespace Tietoa.Controllers.Draft
     public class DraftYearController : ControllerBase
     {
         private readonly ILogger<DraftYearController> _logger;
+        private readonly IGetRequest _GetRequest;
 
-        public DraftYearController(ILogger<DraftYearController> logger)
+        public DraftYearController(ILogger<DraftYearController> logger, IGetRequest getRequest)
         {
             _logger = logger;
+            _GetRequest = getRequest;   
         }
 
         [HttpGet]
@@ -23,9 +25,8 @@ namespace Tietoa.Controllers.Draft
             if (year == 0)
                 return BadRequest("Draft year missing");
 
-            GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
-            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
+            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
             List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
             foreach (var d in root.drafts)

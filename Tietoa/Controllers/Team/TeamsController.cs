@@ -10,14 +10,21 @@ namespace Tietoa.Controllers.Team
     [Route("[controller]")]
     public class TeamsController : ControllerBase
     {
-        private static HttpClient _httpClient = new HttpClient();
+        private readonly ILogger<TeamsController> _logger;
+        private readonly IGetRequest _GetRequest;
+
+        public TeamsController(ILogger<TeamsController> logger, IGetRequest  getRequest   ) 
+        {
+            _logger = logger;
+            _GetRequest = getRequest;
+        }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            GetRequest response = new GetRequest();
+           // GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/teams";
-            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
+            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
             List<TeamDto> teamsDto = new List<TeamDto>();
             foreach (var t in root.teams)

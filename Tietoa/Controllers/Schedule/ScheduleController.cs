@@ -11,18 +11,20 @@ namespace Tietoa.Controllers.Schedule
     public class ScheduleController : ControllerBase
     {
         private readonly ILogger<ScheduleController> _logger;
+        private readonly IGetRequest _GetRequest;
 
-        public ScheduleController(ILogger<ScheduleController> logger)
+        public ScheduleController(ILogger<ScheduleController> logger, IGetRequest getRequest)
         {
             _logger = logger;
+            _GetRequest = getRequest;   
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            GetRequest response = new GetRequest();
+            //GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/schedule";
-            var root = JsonConvert.DeserializeObject<Root>(response.DownloadResponse(url).Result);
+            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
             List<ScheduleDto> schedules = new List<ScheduleDto>();
             foreach (var d in root.dates)
