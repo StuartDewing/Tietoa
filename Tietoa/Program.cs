@@ -11,10 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
     x.AddScoped<IGetPlayer, GetPlayer>();
-});
-builder.Host.ConfigureServices(x => {
     x.AddScoped<IGetRequest, GetRequest>();
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
