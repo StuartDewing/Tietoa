@@ -24,22 +24,29 @@ namespace Tietoa.Controllers.Divisions
         {
           
             var url = $"https://statsapi.web.nhl.com/api/v1/divisions";
-            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
-            List<DivisionsDto> divisions = new List<DivisionsDto>();
-            foreach (var d in root.divisions)
+            //TODO: Error handerling
+            var response = await _GetRequest.DownloadResponse(url);
+
+            var root = JsonConvert.DeserializeObject<Root>(response);
+
+            if (root?.divisions == null)
+                return NotFound();  
+
+            List<DivisionsDto> divisionsDto = new List<DivisionsDto>();
+            foreach (var division in root.divisions)
             {
-                if (d.active == true) 
+                if (division.active) 
                 {
-                    divisions.Add(new DivisionsDto
+                    divisionsDto.Add(new DivisionsDto
                     {
-                        Id = d.id,
-                        Name = d.name,
-                        Conference = d.conference.name
+                        Id = division.id,
+                        Name = division.name,
+                        Conference = division.conference.name
                     });
                 }   
             }
-            return Ok(divisions);
+            return Ok(divisionsDto);
         }
     }
 }

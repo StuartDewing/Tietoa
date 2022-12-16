@@ -5,10 +5,11 @@
         public async Task<string> DownloadResponse(string url)
         {
             var _httpClient = new HttpClient();
-            var response = await _httpClient.GetAsync(url);
-            var responseString = await response.Content.ReadAsStringAsync();
+            var response = await _httpClient.GetStringAsync(url);
+            //var responsefd = await _httpClient.GetAsync(url);
+            //var responseString = await response.Content.ReadAsStringAsync();
 
-            return responseString;
+            return response;
         }
     }
 }
