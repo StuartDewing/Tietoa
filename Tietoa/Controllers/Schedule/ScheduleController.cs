@@ -22,24 +22,28 @@ namespace Tietoa.Controllers.Schedule
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            //GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/schedule";
-            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
-            List<ScheduleDto> schedules = new List<ScheduleDto>();
-            foreach (var d in root.dates)
+            var response = await _GetRequest.DownloadResponse(url);
+            var root = JsonConvert.DeserializeObject<Root>(response);
+
+            if (root?.dates == null)
+                return NotFound();
+
+            List<ScheduleDto> schedulesDto = new List<ScheduleDto>();
+            foreach (var dates in root.dates)
             {
-                foreach (var g in d.games) 
+                foreach (var games in dates.games) 
                 {
-                    schedules.Add(new ScheduleDto
+                    schedulesDto.Add(new ScheduleDto
                     {
-                        Date = g.gameDate,
-                        AwayTeam = g.teams.away.team.name,
-                        HomeTeam = g.teams.home.team.name
+                        Date = games.gameDate,
+                        AwayTeam = games.teams.away.team.name,
+                        HomeTeam = games.teams.home.team.name
                     });
                 }
             }
-            return Ok(schedules);
+            return Ok(schedulesDto);
         }
     }
 }

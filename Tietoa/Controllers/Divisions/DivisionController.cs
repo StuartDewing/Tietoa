@@ -26,8 +26,8 @@ namespace Tietoa.Controllers.Divisions
             var url = $"https://statsapi.web.nhl.com/api/v1/divisions";
 
             //TODO: Error handerling
-            var response = await _GetRequest.DownloadResponse(url);
 
+            var response = await _GetRequest.DownloadResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
             if (root?.divisions == null)

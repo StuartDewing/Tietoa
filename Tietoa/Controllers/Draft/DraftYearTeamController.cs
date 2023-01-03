@@ -27,28 +27,32 @@ namespace Tietoa.Controllers.Draft
             if (team == null)
                 return BadRequest("Team name missing");
 
-            
             var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
-            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
 
-            List<DraftByYearDto> draftByYears = new List<DraftByYearDto>();
-            foreach (var d in root.drafts)
+            var response = await _GetRequest.DownloadResponse(url);
+            var root = JsonConvert.DeserializeObject<Root>(response);
+
+            if (root?.drafts == null)
+                return NotFound();
+
+            List<DraftByYearDto> draftByYearsDto = new List<DraftByYearDto>();
+            foreach (var drafts in root.drafts)
             {
-                foreach (var r in d.rounds)
+                foreach (var rounds in drafts.rounds)
                 {
-                    foreach (var p in r.picks.Where(t => t.team.name == team))
+                    foreach (var picks in rounds.picks.Where(t => t.team.name == team))
                     {
-                        draftByYears.Add(new DraftByYearDto
+                        draftByYearsDto.Add(new DraftByYearDto
                         {
-                            Round = p.round,
-                            Pick = p.pickOverall,
-                            Team = p.team.name,
-                            FullName = p.prospect.fullName
+                            Round = picks.round,
+                            Pick = picks.pickOverall,
+                            Team = picks.team.name,
+                            FullName = picks.prospect.fullName
                         });
                     }
                 }
             }
-            return Ok(draftByYears);
+            return Ok(draftByYearsDto);
         }
     }
 }

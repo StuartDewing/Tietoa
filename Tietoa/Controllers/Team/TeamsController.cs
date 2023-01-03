@@ -22,17 +22,21 @@ namespace Tietoa.Controllers.Team
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-           // GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/teams";
-            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
+           
+            var response = await _GetRequest.DownloadResponse(url);
+            var root = JsonConvert.DeserializeObject<Root>(response);
+
+            if (root?.teams == null)
+                return NotFound();
 
             List<TeamDto> teamsDto = new List<TeamDto>();
-            foreach (var t in root.teams)
+            foreach (var teams in root.teams)
             {
                 teamsDto.Add(new TeamDto 
                 { 
-                    Id = t.id, 
-                    Name = t.name 
+                    Id = teams.id, 
+                    Name = teams.name 
                 });
             }
             return Ok(teamsDto);

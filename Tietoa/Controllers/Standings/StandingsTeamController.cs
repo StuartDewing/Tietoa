@@ -22,28 +22,32 @@ namespace Tietoa.Controllers.Standings
         [HttpGet]
         public async Task<IActionResult> Index(string team)
         {
-            //GetRequest response = new GetRequest();
             var url = $"https://statsapi.web.nhl.com/api/v1/standings";
-            var root = JsonConvert.DeserializeObject<Root>(_GetRequest.DownloadResponse(url).Result);
+           
+            var response = await _GetRequest.DownloadResponse(url);
+            var root = JsonConvert.DeserializeObject<Root>(response);
 
-            List<StandingsDto> standings = new List<StandingsDto>();
-            foreach (var r in root.records) 
+            if (root?.records == null)
+                return NotFound();
+
+            List<StandingsDto> standingsDto = new List<StandingsDto>();
+            foreach (var records in root.records) 
             {
-                foreach (var tr in r.teamRecords.Where(t => t.team.name == team)) 
+                foreach (var teamRecords in records.teamRecords.Where(t => t.team.name == team)) 
                 {
-                    standings.Add(new StandingsDto
+                    standingsDto.Add(new StandingsDto
                     {
-                        Name = tr.team.name,
-                        Wins = tr.leagueRecord.wins,
-                        Losses = tr.leagueRecord.losses,
-                        OT = tr.leagueRecord.ot,
-                        Points = tr.points,
-                        Goals = tr.goalsScored,
-                        GoalsAgainst = tr.goalsAgainst
+                        Name = teamRecords.team.name,
+                        Wins = teamRecords.leagueRecord.wins,
+                        Losses = teamRecords.leagueRecord.losses,
+                        OT = teamRecords.leagueRecord.ot,
+                        Points = teamRecords.points,
+                        Goals = teamRecords.goalsScored,
+                        GoalsAgainst = teamRecords.goalsAgainst
                     });
                 }
             }
-            return Ok(standings);
+            return Ok(standingsDto);
         }
     }
 
