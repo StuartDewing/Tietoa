@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Services.GetRequest;
+using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Teams;
 using Tietoa.Domain.Models.Teams.JsonClasses;
 
@@ -11,20 +11,19 @@ namespace Tietoa.Controllers.Team
     public class TeamsController : ControllerBase
     {
         private readonly ILogger<TeamsController> _logger;
-        private readonly IGetRequest _GetRequest;
+        private readonly INhlRequest _NhlRequest;
 
-        public TeamsController(ILogger<TeamsController> logger, IGetRequest  getRequest   ) 
+        public TeamsController(ILogger<TeamsController> logger, INhlRequest  nhlRequest) 
         {
             _logger = logger;
-            _GetRequest = getRequest;
+            _NhlRequest = nhlRequest;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var url = $"https://statsapi.web.nhl.com/api/v1/teams";
-           
-            var response = await _GetRequest.DownloadResponse(url);
+            var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
             if (root?.teams == null)

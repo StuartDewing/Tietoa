@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Services.GetRequest;
+using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Divisions;
 using Tietoa.Domain.Models.Divisions.JsonClasses;
 
@@ -11,12 +11,12 @@ namespace Tietoa.Controllers.Divisions
     public class DivisionController : ControllerBase
     {
         private readonly ILogger<DivisionController> _logger;
-        private readonly IGetRequest _GetRequest;
+        private readonly INhlRequest _NhlRequest;
 
-        public DivisionController(ILogger<DivisionController> logger, IGetRequest getRequest)
+        public DivisionController(ILogger<DivisionController> logger, INhlRequest nhlRequest)
         {
             _logger = logger;
-            _GetRequest = getRequest;
+            _NhlRequest = nhlRequest;
         }
 
         [HttpGet]
@@ -24,11 +24,10 @@ namespace Tietoa.Controllers.Divisions
         {
           
             var url = $"https://statsapi.web.nhl.com/api/v1/divisions";
+            var response = await _NhlRequest.NHLGetResponse(url);
+            var root = JsonConvert.DeserializeObject<Root>(response);
 
             //TODO: Error handerling
-
-            var response = await _GetRequest.DownloadResponse(url);
-            var root = JsonConvert.DeserializeObject<Root>(response);
 
             if (root?.divisions == null)
                 return NotFound();  

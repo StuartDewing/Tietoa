@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Services.GetRequest;
+using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Standings;
 using Tietoa.Domain.Models.Standings.JsonClasses;
 
@@ -11,20 +11,19 @@ namespace Tietoa.Controllers.Standings
     public class StandingsTeamController : ControllerBase
     {
         private readonly ILogger<StandingsTeamController> _logger;
-        private readonly IGetRequest _GetRequest;
+        private readonly INhlRequest _NhlRequest;
 
-        public StandingsTeamController(ILogger<StandingsTeamController> logger, IGetRequest getRequest)
+        public StandingsTeamController(ILogger<StandingsTeamController> logger, INhlRequest nhlRequest)
         {
             _logger = logger;
-            _GetRequest = getRequest;   
+            _NhlRequest = nhlRequest;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(string team)
         {
             var url = $"https://statsapi.web.nhl.com/api/v1/standings";
-           
-            var response = await _GetRequest.DownloadResponse(url);
+            var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
             if (root?.records == null)

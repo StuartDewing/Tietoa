@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Services.GetRequest;
+using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Player;
 using static Tietoa.Domain.Models.Player.PlayerDto;
 
@@ -11,12 +11,12 @@ namespace Tietoa.Controllers.Player
     public class PlayerIdController : ControllerBase
     {
         private readonly ILogger<PlayerIdController> _logger;
-        private readonly IGetRequest _GetRequest;
+        private readonly INhlRequest _NhlRequest;
 
-        public PlayerIdController(ILogger<PlayerIdController> logger, IGetRequest getRequest)
+        public PlayerIdController(ILogger<PlayerIdController> logger, INhlRequest nhlRequest)
         {
             _logger = logger;
-            _GetRequest = getRequest;
+            _NhlRequest = nhlRequest;
         }
 
         [HttpGet]
@@ -26,8 +26,7 @@ namespace Tietoa.Controllers.Player
                 return BadRequest("Player id missing");
 
             var url = $"https://statsapi.web.nhl.com/api/v1/people/{id}";
-            
-            var response = await _GetRequest.DownloadResponse(url);
+            var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
 

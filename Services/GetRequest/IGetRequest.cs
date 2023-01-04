@@ -1,4 +1,5 @@
 ﻿namespace Services.GetRequest
+
 {
     public interface IGetRequest
     {

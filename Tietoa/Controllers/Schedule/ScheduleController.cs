@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Services.GetRequest;
+using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Schedule;
 using Tietoa.Domain.Models.Schedule.JsonClasses;
 
@@ -11,20 +11,19 @@ namespace Tietoa.Controllers.Schedule
     public class ScheduleController : ControllerBase
     {
         private readonly ILogger<ScheduleController> _logger;
-        private readonly IGetRequest _GetRequest;
+        private readonly INhlRequest _NhlRequest;
 
-        public ScheduleController(ILogger<ScheduleController> logger, IGetRequest getRequest)
+        public ScheduleController(ILogger<ScheduleController> logger, INhlRequest nhlRequest)
         {
             _logger = logger;
-            _GetRequest = getRequest;   
+            _NhlRequest = nhlRequest;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var url = $"https://statsapi.web.nhl.com/api/v1/schedule";
-
-            var response = await _GetRequest.DownloadResponse(url);
+            var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
             if (root?.dates == null)

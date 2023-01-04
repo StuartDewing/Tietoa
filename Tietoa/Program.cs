@@ -1,5 +1,7 @@
 //using Services.Player;
 using Services.GetRequest;
+using Services.NHL;
+using Services.NHL.NhlRequest;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
-  // x.AddScoped<IGetPlayer, GetPlayer>();
+    x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
 });
 
