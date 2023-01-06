@@ -3,6 +3,6 @@
 {
     public interface INhlRequest
     {
-        Task<string> NHLGetResponse(string url);
+        Task<string> NHLGetResponse(string urlSegment);
     }
 }

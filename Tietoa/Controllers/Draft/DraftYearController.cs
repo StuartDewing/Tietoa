@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Services.NHL;
 using Services.NHL.NhlRequest;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
@@ -11,33 +12,49 @@ namespace Tietoa.Controllers.Draft
     public class DraftYearController : ControllerBase
     {
         private readonly ILogger<DraftYearController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly INhlDraftService _nhlDraftService;
 
-        public DraftYearController(ILogger<DraftYearController> logger, INhlRequest nhlRequest)
+        public DraftYearController(ILogger<DraftYearController> logger, INhlDraftService nhlDraftService)
         {
             _logger = logger;
-            _NhlRequest = nhlRequest;
+            _nhlDraftService = nhlDraftService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index(int year)
         {
+            if (year <= 1950)//TODO
+                return BadRequest("Draft year invalid");
+
+            var draftByYearsDto = await _nhlDraftService.GetDraftByYear(year);
+            
+            if (draftByYearsDto.Count() <= 0)
+                return NotFound();
+           
+            return Ok(draftByYearsDto);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetByYearTeam(int year, string team)
+        {
             if (year == 0)
                 return BadRequest("Draft year missing");
+            if (string.IsNullOrWhiteSpace(team))
+                return BadRequest("Team name missing");
 
-            var url = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
+            var year = $"https://statsapi.web.nhl.com/api/v1/draft/{year}";
             var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
 
-            //if (root?.drafts == null)
-            //    return NotFound();
+            if (root?.drafts == null)
+                return NotFound();
 
             List<DraftByYearDto> draftByYearsDto = new List<DraftByYearDto>();
             foreach (var drafts in root.drafts)
             {
                 foreach (var rounds in drafts.rounds)
                 {
-                    foreach (var picks in rounds.picks)
+                    foreach (var picks in rounds.picks.Where(t => t.team.name == team))
                     {
                         draftByYearsDto.Add(new DraftByYearDto
                         {
@@ -51,5 +68,6 @@ namespace Tietoa.Controllers.Draft
             }
             return Ok(draftByYearsDto);
         }
+
     }
 }
