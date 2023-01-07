@@ -30,5 +30,3 @@ GO
 ALTER TABLE dbo.NhlDraftProspect SET (LOCK_ESCALATION = TABLE)
 GO
 COMMIT
-
-providerName=System.Data.SqlClient
