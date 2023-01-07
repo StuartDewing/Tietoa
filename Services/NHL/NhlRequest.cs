@@ -12,7 +12,7 @@ namespace Services.NHL.NhlRequest
             _GetRequest = getRequest;
         }
 
-        public async Task<string> NHLGetResponse(string urlSegment)
+        public async Task<string> NhlGetResponse(string urlSegment)
         {
             string url = baseUrl + urlSegment;
 

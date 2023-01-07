@@ -14,6 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
+    x.AddScoped<INhlDraftService, NhlDraftService>();
 });
 
 var app = builder.Build();

@@ -1,8 +1,10 @@
-﻿namespace Services.NHL
+﻿using Tietoa.Domain.Models.Draft;
+
+namespace Services.NHL
 
 {
     public interface INhlDraftService
     {
-        Task<string> GetDraftByYear(int year);
+        Task<List<DraftByYearDto>> GetDraftByYear(int year);
     }
 }

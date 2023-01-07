@@ -23,7 +23,7 @@ namespace Services.NHL
 
          //Call nhl request service
 
-            var response = await _NhlRequest.NHLGetResponse(urlSegment);
+            var response = await _NhlRequest.NhlGetResponse(urlSegment);
 
             //map to responsedto
 
