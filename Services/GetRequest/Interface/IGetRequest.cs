@@ -1,4 +1,4 @@
-﻿namespace Services.GetRequest
+﻿namespace Services.GetRequest.Interface
 
 {
     public interface IGetRequest

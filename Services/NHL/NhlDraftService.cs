@@ -1,7 +1,7 @@
 ﻿
 
 using Newtonsoft.Json;
-using Services.NHL.NhlRequest;
+using Services.NHL.Interface;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
 

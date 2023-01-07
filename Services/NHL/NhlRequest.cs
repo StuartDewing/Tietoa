@@ -1,4 +1,5 @@
-﻿using Services.GetRequest;
+﻿using Services.GetRequest.Interface;
+using Services.NHL.Interface;
 
 namespace Services.NHL.NhlRequest
 {

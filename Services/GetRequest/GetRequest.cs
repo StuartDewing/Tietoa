@@ -1,4 +1,6 @@
-﻿namespace Services.GetRequest
+﻿using Services.GetRequest.Interface;
+
+namespace Services.GetRequest
 
 {
     public class GetRequest : IGetRequest

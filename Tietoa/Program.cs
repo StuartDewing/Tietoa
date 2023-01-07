@@ -1,6 +1,8 @@
 //using Services.Player;
 using Services.GetRequest;
+using Services.GetRequest.Interface;
 using Services.NHL;
+using Services.NHL.Interface;
 using Services.NHL.NhlRequest;
 
 var builder = WebApplication.CreateBuilder(args);
