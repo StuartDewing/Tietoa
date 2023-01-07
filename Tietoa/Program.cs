@@ -17,6 +17,7 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
     x.AddScoped<INhlDraftService, NhlDraftService>();
+   x.AddScoped<INhlDraftMappingService, NhlDraftMappingService>();
 });
 
 var app = builder.Build();

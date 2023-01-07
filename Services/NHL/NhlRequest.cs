@@ -2,6 +2,7 @@
 using Services.NHL.Interface;
 
 namespace Services.NHL.NhlRequest
+
 {
     public class NhlRequest : INhlRequest
     {
@@ -16,7 +17,6 @@ namespace Services.NHL.NhlRequest
         public async Task<string> NhlGetResponse(string urlSegment)
         {
             string url = baseUrl + urlSegment;
-
             var response = await _GetRequest.DownloadResponse(url);
 
             return response;
