@@ -1,0 +1,20 @@
+USE [master]
+GO
+CREATE LOGIN [TietoaUser] WITH PASSWORD=N'abc123', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [TietoaUser]
+GO
+use [master];
+GO
+USE [Tietoa]
+GO
+CREATE USER [TietoaUser] FOR LOGIN [TietoaUser]
+GO
+USE [Tietoa]
+GO
+ALTER USER [TietoaUser] WITH DEFAULT_SCHEMA=[dbo]
+GO
+USE [Tietoa]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [TietoaUser]
+GO
