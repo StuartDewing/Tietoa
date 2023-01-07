@@ -17,32 +17,34 @@ namespace Tietoa.Controllers.Draft
         }
 
         [HttpGet]
+        [Route("DraftByYear")]
         public async Task<IActionResult> DraftByYear(int year)
         {
-            if (year <= 1963)//TODO
+            if (year <= 1963)
                 return BadRequest("Draft year before the first draft of 1963 ");
 
-            var draftByYearsDto = await _nhlDraftService.GetDraftByYear(year);
-            
+            var draftByYearsDto = await _nhlDraftService.DraftByYearRequest(year);
+
             if (draftByYearsDto.Count() <= 0)
                 return NotFound();
-           
+
             return Ok(draftByYearsDto);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> DraftByYearTeam(int year, string team)
-        //{
-        //    if (year <= 1963)//TODO
-        //        return BadRequest("Draft year before the first draft of 1963 ");
+        [HttpGet]
+        [Route("DraftByYearTeam")]
+        public async Task<IActionResult> DraftByYearTeam(int year, string teamName)
+        {
+            if (year <= 1963)
+                return BadRequest("Draft year before the first draft of 1963 ");
 
-        //    var draftByYearsDto = await _nhlDraftService.GetDraftByYear(year);
+            var draftByYearTeamsDto = await _nhlDraftService.DraftByTeamRequest(year, teamName);
 
-        //    if (draftByYearsDto.Count() <= 0)
-        //        return NotFound();
+            if (draftByYearTeamsDto.Count() <= 0)
+                return NotFound();
 
-        //    return Ok(draftByYearsDto);
-        //}
+            return Ok(draftByYearTeamsDto);
+        }
 
     }
 }
