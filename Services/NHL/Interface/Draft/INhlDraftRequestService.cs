@@ -1,6 +1,6 @@
 ﻿using Tietoa.Domain.Models.Draft;
 
-namespace Services.NHL.Interface
+namespace Services.NHL.Interface.Draft
 
 {
     public interface INhlDraftRequestService

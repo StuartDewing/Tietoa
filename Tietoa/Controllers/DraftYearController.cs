@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Services.NHL.Interface;
+using Services.NHL.Interface.Draft;
 
-namespace Tietoa.Controllers.Draft
+namespace Tietoa.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -45,6 +45,5 @@ namespace Tietoa.Controllers.Draft
 
             return Ok(draftByYearTeamsDto);
         }
-
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Services.NHL.Interface;
+using Services.NHL.Interface.Draft;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
 
-namespace Services.NHL
+namespace Services.NHL.Draft
 {
     public class NhlDraftTeamMappingService : INhlDraftTeamMappingService
     {

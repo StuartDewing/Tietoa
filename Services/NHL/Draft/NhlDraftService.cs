@@ -1,7 +1,7 @@
-﻿using Services.NHL.Interface;
+﻿using Services.NHL.Interface.Draft;
 using Tietoa.Domain.Models.Draft;
 
-namespace Services.NHL
+namespace Services.NHL.Draft
 
 {
     public class NhlDraftService : INhlDraftService

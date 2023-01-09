@@ -5,14 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tietoa", "Tietoa\Tietoa.csproj", "{DEDCDE21-0AEB-4EC3-B6DA-2E89524EC035}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{25F45C2E-81BB-46B9-9F56-A02562DA6A8A}"
-	ProjectSection(SolutionItems) = preProject
-		ToDo.txt = ToDo.txt
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{77AEF13F-E6B4-47B3-8C00-7E59196FB476}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tietoa.Domain", "Tietoa.Domain\Tietoa.Domain.csproj", "{C1284A30-6610-4FCD-BF0B-290EB7DC5BA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tietoa.Domain", "Tietoa.Domain\Tietoa.Domain.csproj", "{C1284A30-6610-4FCD-BF0B-290EB7DC5BA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
