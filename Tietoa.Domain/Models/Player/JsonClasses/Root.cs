@@ -1,4 +1,6 @@
-﻿namespace Tietoa.Domain.Models.Player
+﻿using Tietoa.Domain.Models.Player.JsonClasses;
+
+namespace Tietoa.Domain.Models.Player
 {
     public partial class PlayerDto
     {

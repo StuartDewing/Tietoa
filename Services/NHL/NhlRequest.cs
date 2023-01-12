@@ -1,7 +1,7 @@
 ﻿using Services.GetRequest.Interface;
 using Services.NHL.Interface;
 
-namespace Services.NHL.NhlRequest
+namespace Services.NHL
 
 {
     public class NhlRequest : INhlRequest
