@@ -5,19 +5,19 @@ namespace Tietoa.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DraftYearController : ControllerBase
+    public class DraftController : ControllerBase
     {
-        private readonly ILogger<DraftYearController> _logger;
+        private readonly ILogger<DraftController> _logger;
         private readonly INhlDraftService _nhlDraftService;
 
-        public DraftYearController(ILogger<DraftYearController> logger, INhlDraftService nhlDraftService)
+        public DraftController(ILogger<DraftController> logger, INhlDraftService nhlDraftService)
         {
             _logger = logger;
             _nhlDraftService = nhlDraftService;
         }
 
         [HttpGet]
-        [Route("DraftByYear")]
+        [Route("Year")]
         public async Task<IActionResult> DraftByYear(int year)
         {
             if (year <= 1963)
@@ -32,7 +32,7 @@ namespace Tietoa.Controllers
         }
 
         [HttpGet]
-        [Route("DraftByYearTeam")]
+        [Route("YearTeam")]
         public async Task<IActionResult> DraftByYearTeam(int year, string teamName)
         {
             if (year <= 1963)
