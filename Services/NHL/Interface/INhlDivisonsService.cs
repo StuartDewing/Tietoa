@@ -1,6 +1,6 @@
 ﻿using Tietoa.Domain.Models.Divisions;
 
-namespace Services.NHL.Interface.Divisions
+namespace Services.NHL.Interface
 
 {
     public interface INhlDivisionsService
