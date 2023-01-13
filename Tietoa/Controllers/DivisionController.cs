@@ -2,6 +2,7 @@
 using Services.NHL.Interface;
 
 namespace Tietoa.Controllers
+
 {
     [ApiController]
     [Route("[controller]")]

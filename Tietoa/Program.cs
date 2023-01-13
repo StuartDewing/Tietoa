@@ -2,7 +2,6 @@
 using Services.GetRequest;
 using Services.GetRequest.Interface;
 using Services.NHL;
-using Services.NHL.Divisions;
 using Services.NHL.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +16,9 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
     //NHL
-    x.AddScoped<INhlDraftService, NhlDraftService>();
     x.AddScoped<INhlDivisionsService, NhlDivisionsService>();
+    x.AddScoped<INhlDraftService, NhlDraftService>();
+    x.AddScoped<INhlPlayerService, NhlPlayerService>();
 });
 
 var app = builder.Build();

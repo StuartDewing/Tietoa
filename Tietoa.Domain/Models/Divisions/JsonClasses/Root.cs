@@ -1,4 +1,5 @@
 ﻿namespace Tietoa.Domain.Models.Divisions.JsonClasses
+
 {
     public class Root
     {

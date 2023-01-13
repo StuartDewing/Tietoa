@@ -1,6 +1,5 @@
-﻿//using System.Collection.Generic;
+﻿namespace Tietoa.Domain.Models.Draft.JsonClasses
 
-namespace Tietoa.Domain.Models.Draft.JsonClasses
 {
     public class Root
     {

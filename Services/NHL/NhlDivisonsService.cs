@@ -3,7 +3,7 @@ using Services.NHL.Interface;
 using Tietoa.Domain.Models.Divisions;
 using Tietoa.Domain.Models.Divisions.JsonClasses;
 
-namespace Services.NHL.Divisions
+namespace Services.NHL
 
 {
     public class NhlDivisionsService : INhlDivisionsService

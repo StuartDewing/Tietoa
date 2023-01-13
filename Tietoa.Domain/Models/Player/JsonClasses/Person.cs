@@ -1,6 +1,7 @@
-﻿using static Tietoa.Domain.Models.Player.PlayerDto;
+﻿//using static Tietoa.Domain.Models.Player.PlayerDto;
 
 namespace Tietoa.Domain.Models.Player.JsonClasses
+
 {
 
     public class Person
