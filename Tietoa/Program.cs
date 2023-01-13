@@ -3,10 +3,8 @@ using Services.GetRequest;
 using Services.GetRequest.Interface;
 using Services.NHL;
 using Services.NHL.Divisions;
-using Services.NHL.Draft;
 using Services.NHL.Interface;
 using Services.NHL.Interface.Divisions;
-using Services.NHL.Interface.Draft;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,12 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
-    //Draft
+    //NHL
     x.AddScoped<INhlDraftService, NhlDraftService>();
-    x.AddScoped<INhlDraftRequestService, NhlDraftRequestService>();
-    x.AddScoped<INhlDraftMappingService, NhlDraftMappingService>();
-    x.AddScoped<INhlDraftTeamMappingService, NhlDraftTeamMappingService>();
-    //Divisons
     x.AddScoped<INhlDivisionsService, NhlDivisionsService>();
     x.AddScoped<INhlDivisionsRequestService, NhlDivisionsRequestService>();
     x.AddScoped<INhlDivisionsMappingService, NhlDivisionsMappingService>();

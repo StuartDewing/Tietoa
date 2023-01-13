@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Services.NHL.Interface.Draft;
+using Services.NHL.Interface;
 
 namespace Tietoa.Controllers
 {

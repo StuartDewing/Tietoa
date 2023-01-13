@@ -1,18 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
-using Services.NHL.Interface.Draft;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
 
-namespace Services.NHL.Draft
+namespace Services.NHL
 
 {
     public class NhlDraftService : INhlDraftService
     {
         private readonly INhlRequest _NhlRequest;
-        private readonly INhlDraftRequestService _NhlDraftRequestService;
-        private readonly INhlDraftMappingService _NhlDraftMappingService;
-        private readonly INhlDraftTeamMappingService _NhlDraftTeamMappingService;
 
         private async Task<string> nhlDraftRequest(int year)
         {
@@ -21,12 +17,9 @@ namespace Services.NHL.Draft
             return response;
         }
 
-        public NhlDraftService(INhlRequest nhlRequest, INhlDraftRequestService nhlDraftRequestService, INhlDraftMappingService nhlDraftMappingService, INhlDraftTeamMappingService nhlDraftTeamMappingService)
+        public NhlDraftService(INhlRequest nhlRequest)
         {
             _NhlRequest = nhlRequest;
-            _NhlDraftRequestService = nhlDraftRequestService;
-            _NhlDraftMappingService = nhlDraftMappingService;
-            _NhlDraftTeamMappingService = nhlDraftTeamMappingService;
         }
 
         public async Task<List<DraftByYearDto>> DraftByYearRequest(int year)
