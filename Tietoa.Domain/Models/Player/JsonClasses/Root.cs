@@ -1,13 +1,9 @@
-﻿namespace Tietoa.Domain.Models.Player
+﻿namespace Tietoa.Domain.Models.Player.JsonClasses
+
 {
-    public partial class PlayerDto
+    public class Root
     {
-        public class Root
-        {
-            public string copyright { get; set; }
-            public List<Person> people { get; set; }
-        }
-
-
+        public string copyright { get; set; }
+        public List<Person> people { get; set; }
     }
 }

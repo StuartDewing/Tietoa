@@ -1,15 +1,11 @@
-﻿namespace Tietoa.Domain.Models.Player
+﻿namespace Tietoa.Domain.Models.Player.JsonClasses
+
 {
-    public partial class PlayerDto
+    public class PrimaryPosition
     {
-        public class PrimaryPosition
-        {
-            public string code { get; set; }
-            public string name { get; set; }
-            public string type { get; set; }
-            public string abbreviation { get; set; }
-        }
-
-
+        public string code { get; set; }
+        public string name { get; set; }
+        public string type { get; set; }
+        public string abbreviation { get; set; }
     }
 }

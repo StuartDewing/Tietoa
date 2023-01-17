@@ -1,15 +1,11 @@
-﻿namespace Tietoa.Domain.Models.Player
+﻿namespace Tietoa.Domain.Models.Player.JsonClasses
+
 {
-    public partial class PlayerDto
-    {
         // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-        public class CurrentTeam
-        {
-            public int id { get; set; }
-            public string name { get; set; }
-            public string link { get; set; }
-        }
-
-
+    public class CurrentTeam
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string link { get; set; }
     }
 }

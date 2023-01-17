@@ -1,51 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Services.NHL.NhlRequest;
-using Tietoa.Domain.Models.Standings;
-using Tietoa.Domain.Models.Standings.JsonClasses;
+using Services.NHL;
+using Services.NHL.Interface;
 
-namespace Tietoa.Controllers.Standings
+namespace Tietoa.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class StandingsController : ControllerBase
     {
         private readonly ILogger<StandingsController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly INhlStandingsService _nhlStandingsService;
 
-        public StandingsController(ILogger<StandingsController> logger, INhlRequest nhlRequest)
+        public StandingsController(ILogger<StandingsController> logger, INhlStandingsService nhlStandingsService)
         {
             _logger = logger;
-            _NhlRequest = nhlRequest;
+            _nhlStandingsService = nhlStandingsService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        [Route("League")]
+        public async Task<IActionResult> StandingsLeague()
         {
-            var url = $"https://statsapi.web.nhl.com/api/v1/standings";
-            var response = await _NhlRequest.NHLGetResponse(url);
-            var root = JsonConvert.DeserializeObject<Root>(response);
+            var standingsDto = await _nhlStandingsService.StandingsRequest();
 
-            if (root?.records == null)
-                return NotFound();
+            return Ok(standingsDto);
+        }
 
-            List<StandingsDto> standingsDto = new List<StandingsDto>();
-            foreach (var records in root.records) 
-            {
-                foreach (var teamRecords in records.teamRecords) 
-                {
-                    standingsDto.Add(new StandingsDto
-                    {
-                        Name = teamRecords.team.name,
-                        Wins = teamRecords.leagueRecord.wins,
-                        Losses = teamRecords.leagueRecord.losses,
-                        OT = teamRecords.leagueRecord.ot,
-                        Points = teamRecords.points,
-                        Goals = teamRecords.goalsScored,
-                        GoalsAgainst = teamRecords.goalsAgainst
-                    });
-                }
-            }
+        [HttpGet]
+        [Route("Team")]
+        public async Task<IActionResult> StandingsTeam(string team)
+        {
+            var standingsDto = await _nhlStandingsService.StandingsTeamRequest(team);
+
             return Ok(standingsDto);
         }
     }

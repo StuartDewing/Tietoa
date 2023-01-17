@@ -1,7 +1,8 @@
 //using Services.Player;
 using Services.GetRequest;
+using Services.GetRequest.Interface;
 using Services.NHL;
-using Services.NHL.NhlRequest;
+using Services.NHL.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,13 @@ builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlRequest, NhlRequest>();
     x.AddScoped<IGetRequest, GetRequest>();
+    //NHL
+    x.AddScoped<INhlDivisionsService, NhlDivisionsService>();
+    x.AddScoped<INhlDraftService, NhlDraftService>();
+    x.AddScoped<INhlPlayerService, NhlPlayerService>();
+    x.AddScoped<INhlScheduleService, NhlScheduleService>();
+    x.AddScoped<INhlStandingsService, NhlStandingsService>();
+    x.AddScoped<INhlTeamsService, NhlTeamsService>();
 });
 
 var app = builder.Build();
