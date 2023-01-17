@@ -20,6 +20,7 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlDraftService, NhlDraftService>();
     x.AddScoped<INhlPlayerService, NhlPlayerService>();
     x.AddScoped<INhlScheduleService, NhlScheduleService>();
+    x.AddScoped<INhlStandingsService, NhlStandingsService>();
     x.AddScoped<INhlTeamsService, NhlTeamsService>();
 });
 
