@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Draft;
 using Tietoa.Domain.Models.Draft.JsonClasses;
 
@@ -12,7 +13,7 @@ namespace Services.NHL
 
         private async Task<string> nhlDraftRequest(int year)
         {
-            string urlSegment = $"draft/{year}";
+            string urlSegment = $"{NhlConstants.Draft}/{year}";
             var response = await _NhlRequest.NhlGetResponse(urlSegment);
             return response;
         }

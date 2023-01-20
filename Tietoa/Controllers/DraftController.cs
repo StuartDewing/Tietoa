@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 
 namespace Tietoa.Controllers
 {
@@ -9,6 +10,7 @@ namespace Tietoa.Controllers
     {
         private readonly ILogger<DraftController> _logger;
         private readonly INhlDraftService _nhlDraftService;
+        
 
         public DraftController(ILogger<DraftController> logger, INhlDraftService nhlDraftService)
         {
@@ -20,8 +22,8 @@ namespace Tietoa.Controllers
         [Route("Year")]
         public async Task<IActionResult> DraftByYear(int year)
         {
-            if (year <= 1963)
-                return BadRequest("Draft year before the first draft of 1963 ");
+            if (year <= NhlConstants.FirstDraftYear)
+                return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
 
             var draftByYearsDto = await _nhlDraftService.DraftByYearRequest(year);
 
@@ -35,8 +37,8 @@ namespace Tietoa.Controllers
         [Route("YearTeam")]
         public async Task<IActionResult> DraftByYearTeam(int year, string teamName)
         {
-            if (year <= 1963)
-                return BadRequest("Draft year before the first draft of 1963 ");
+            if (year <= NhlConstants.FirstDraftYear)
+                return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
 
             var draftByYearTeamsDto = await _nhlDraftService.DraftByTeamRequest(year, teamName);
 

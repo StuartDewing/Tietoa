@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Schedule;
 using Tietoa.Domain.Models.Schedule.JsonClasses;
 
@@ -9,7 +10,7 @@ namespace Services.NHL
     public class NhlScheduleService : INhlScheduleService
     {
         private readonly INhlRequest _NhlRequest;
-        private string urlSegment = $"schedule";
+        private string urlSegment = $"{NhlConstants.Schedule}";
 
         public NhlScheduleService(INhlRequest nhlRequest)
         {

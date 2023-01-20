@@ -2,6 +2,7 @@
 using Services.NHL.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Teams;
 using Tietoa.Domain.Models.Teams.JsonClasses;
 
@@ -11,7 +12,7 @@ namespace Services.NHL
     public class NhlTeamsService : INhlTeamsService
     {
         private readonly INhlRequest _NhlRequest;
-        private string urlSegment = $"teams";
+        private string urlSegment = $"{NhlConstants.Teams}";
 
         public NhlTeamsService(INhlRequest nhlRequest)
         {

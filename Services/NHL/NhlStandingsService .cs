@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Standings;
 using Tietoa.Domain.Models.Standings.JsonClasses;
 
@@ -12,7 +13,7 @@ namespace Services.NHL
 
         private async Task<string> nhlStandingsRequest()
         {
-            string urlSegment = $"standings";
+            string urlSegment = $"{NhlConstants.Standings}";
             var response = await _NhlRequest.NhlGetResponse(urlSegment);
             return response;
         }

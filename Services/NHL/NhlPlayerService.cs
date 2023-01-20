@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Player;
 using Tietoa.Domain.Models.Player.JsonClasses;
 
@@ -12,7 +13,7 @@ namespace Services.NHL
 
         private async Task<string> nhlPlayerRequest(int playerId)
         {
-            string urlSegment = $"people/{playerId}";
+            string urlSegment = $"{NhlConstants.People}/{playerId}";
             var response = await _NhlRequest.NhlGetResponse(urlSegment);
             return response;
         }

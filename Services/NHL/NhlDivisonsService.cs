@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 using Tietoa.Domain.Models.Divisions;
 using Tietoa.Domain.Models.Divisions.JsonClasses;
 
@@ -9,7 +10,7 @@ namespace Services.NHL
     public class NhlDivisionsService : INhlDivisionsService
     {
         private readonly INhlRequest _NhlRequest;
-        private string urlSegment = $"divisions";
+        private string urlSegment = $"{NhlConstants.Division}";
 
         public NhlDivisionsService(INhlRequest nhlRequest)
         {

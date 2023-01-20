@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Interface;
+using Tietoa.Domain;
 
 namespace Tietoa.Controllers
 
@@ -22,7 +23,7 @@ namespace Tietoa.Controllers
         public async Task<IActionResult> Get(int playerId) //8478007 = Elvis Merzlikins
         {
             if (playerId == 0)
-                return BadRequest("Player id missing");
+                return BadRequest($"{ValidationMessages.BadRequestPlayerIdMissing}");
 
             var playerDto = await _NhlPlayerService.PlayerRequest(playerId);
 
