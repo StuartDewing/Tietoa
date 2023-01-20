@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Tietoa.Domain;
 using Tietoa.Domain.Models.Teams;
 using Tietoa.Domain.Models.Teams.JsonClasses;
