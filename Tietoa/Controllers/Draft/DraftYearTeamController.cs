@@ -11,9 +11,9 @@ namespace Tietoa.Controllers.Draft
     public class DraftYearTeamController : ControllerBase
     {
         private readonly ILogger<DraftYearController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly IGetData _NhlRequest;
 
-        public DraftYearTeamController(ILogger<DraftYearController> logger, INhlRequest nhlRequest)
+        public DraftYearTeamController(ILogger<DraftYearController> logger, IGetData nhlRequest)
         {
             _logger = logger;
             _NhlRequest = nhlRequest;

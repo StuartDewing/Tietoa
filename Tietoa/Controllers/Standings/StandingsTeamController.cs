@@ -11,9 +11,9 @@ namespace Tietoa.Controllers.Standings
     public class StandingsTeamController : ControllerBase
     {
         private readonly ILogger<StandingsTeamController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly IGetData _NhlRequest;
 
-        public StandingsTeamController(ILogger<StandingsTeamController> logger, INhlRequest nhlRequest)
+        public StandingsTeamController(ILogger<StandingsTeamController> logger, IGetData nhlRequest)
         {
             _logger = logger;
             _NhlRequest = nhlRequest;

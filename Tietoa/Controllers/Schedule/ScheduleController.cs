@@ -11,9 +11,9 @@ namespace Tietoa.Controllers.Schedule
     public class ScheduleController : ControllerBase
     {
         private readonly ILogger<ScheduleController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly IGetData _NhlRequest;
 
-        public ScheduleController(ILogger<ScheduleController> logger, INhlRequest nhlRequest)
+        public ScheduleController(ILogger<ScheduleController> logger, IGetData nhlRequest)
         {
             _logger = logger;
             _NhlRequest = nhlRequest;

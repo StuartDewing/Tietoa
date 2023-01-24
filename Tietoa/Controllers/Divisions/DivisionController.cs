@@ -50,7 +50,7 @@ namespace Tietoa.Controllers.Divisions
             //GetData();
 
 
-          
+
             var url = $"https://statsapi.web.nhl.com/api/v1/divisions";
             var response = await _NhlRequest.NHLGetResponse(url);
             var root = JsonConvert.DeserializeObject<Root>(response);
@@ -58,12 +58,12 @@ namespace Tietoa.Controllers.Divisions
             //TODO: Error handerling
 
             if (root?.divisions == null)
-                return NotFound();  
+                return NotFound();
 
             List<DivisionsDto> divisionsDto = new List<DivisionsDto>();
             foreach (var division in root.divisions)
             {
-                if (division.active) 
+                if (division.active)
                 {
                     divisionsDto.Add(new DivisionsDto
                     {
@@ -71,7 +71,7 @@ namespace Tietoa.Controllers.Divisions
                         Name = division.name,
                         Conference = division.conference.name
                     });
-                }   
+                }
             }
             return Ok(divisionsDto);
         }

@@ -11,9 +11,9 @@ namespace Tietoa.Controllers.Player
     public class PlayerIdController : ControllerBase
     {
         private readonly ILogger<PlayerIdController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly IGetData _NhlRequest;
 
-        public PlayerIdController(ILogger<PlayerIdController> logger, INhlRequest nhlRequest)
+        public PlayerIdController(ILogger<PlayerIdController> logger, IGetData nhlRequest)
         {
             _logger = logger;
             _NhlRequest = nhlRequest;

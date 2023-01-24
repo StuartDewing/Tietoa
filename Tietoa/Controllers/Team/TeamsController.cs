@@ -11,9 +11,9 @@ namespace Tietoa.Controllers.Team
     public class TeamsController : ControllerBase
     {
         private readonly ILogger<TeamsController> _logger;
-        private readonly INhlRequest _NhlRequest;
+        private readonly IGetData _NhlRequest;
 
-        public TeamsController(ILogger<TeamsController> logger, INhlRequest  nhlRequest) 
+        public TeamsController(ILogger<TeamsController> logger, IGetData  nhlRequest) 
         {
             _logger = logger;
             _NhlRequest = nhlRequest;

@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
-    x.AddScoped<INhlRequest, NhlRequest>();
+    x.AddScoped<IGetData, GetData>();
     x.AddScoped<IGetRequest, GetRequest>();
 });
 
