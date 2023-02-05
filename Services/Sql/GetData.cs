@@ -2,8 +2,8 @@
 using Services.Sql.Interface;
 using System.Data;
 using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
 using Tietoa.Domain;
+using System.Data.SqlClient;
 
 namespace Services.Sql.GetData
 {

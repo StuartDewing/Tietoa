@@ -5,6 +5,7 @@ using Services.NHL;
 using Services.NHL.Interface;
 using Services.Sql.GetData;
 using Services.Sql.Interface;
+using Services.Sql.UpdateData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlTeamsService, NhlTeamsService>();
     //SQL
     x.AddScoped<IGetData, GetData>();
+    x.AddScoped<IInsertData, InsertData>();
 });
 
 var app = builder.Build();
