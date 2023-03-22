@@ -11,39 +11,14 @@ namespace Services.NHL
     public class NhlDivisionsService : INhlDivisionsService
     {
         private readonly INhlRequest _NhlRequest;
-       private readonly IInsertData _InsertData;
+        private readonly IInsertData _InsertData;
         private string urlSegment = $"{NhlConstants.Division}";
 
         public NhlDivisionsService(INhlRequest nhlRequest, IInsertData insertData)
         {
             _NhlRequest = nhlRequest;
-            _InsertData = insertData;
+           _InsertData = insertData;
         }
-
-        //public async Task<List<DivisionsDto>> DivisionsRequest()
-        //{
-        //    var response = await _NhlRequest.NhlGetResponse(urlSegment);
-        //    var root = JsonConvert.DeserializeObject<Root>(response);
-
-        //    List<DivisionsDto> divisionsDto = new List<DivisionsDto>();
-
-        //    if (root == null)
-        //        return divisionsDto;
-
-        //    foreach (var division in root.divisions)
-        //    {
-        //        if (division.active)
-        //        {
-        //            divisionsDto.Add(new DivisionsDto
-        //            {
-        //                Id = division.id,
-        //                Name = division.name,
-        //                Conference = division.conference.name
-        //            });
-        //        }
-        //    }
-        //    return divisionsDto;
-        //}
 
         public async Task<List<DivisionsDto>> DivisionsRequest()
         {
@@ -67,13 +42,11 @@ namespace Services.NHL
                     });
 
                     _InsertData.InsertTable(division.id, division.name, division.conference.name);
-
-
-
-
                 }
             }
             return divisionsDto;
         }
+
     }
 }
+

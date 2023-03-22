@@ -1,15 +1,13 @@
-﻿using Services.Sql;
+﻿using Microsoft.Extensions.Configuration;
 using Services.Sql.Interface;
 using System.Data;
-using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
-using Tietoa.Domain;
 
 namespace Services.Sql.UpdateData
 {
     public class InsertData : IInsertData
     {
-        private readonly IInsertData _InsertData;
+        //private readonly IInsertData _InsertData;
         private readonly IConfiguration _configuration;
 
         private string sqlPopulateTableFromResponse(int divisionId, string divisionName, string divisionConference)
@@ -18,9 +16,9 @@ namespace Services.Sql.UpdateData
             return sqlQuery;
         }
 
-        public InsertData(IInsertData InsertData, IConfiguration configuration)
+        public InsertData( IConfiguration configuration)
         {
-            _InsertData = InsertData;
+            //_InsertData = InsertData;
             _configuration = configuration;
         }
 
@@ -31,13 +29,14 @@ namespace Services.Sql.UpdateData
             SqlConnection connection = new SqlConnection(config);
             connection.Open();
             string query = sqlPopulateTableFromResponse(divisionId, divisionName, divisionConference);
+            //string query = "Select * FROM ";
             SqlCommand command = new SqlCommand(query, connection);
 
             DataTable datatable = new DataTable();
             datatable.Load(command.ExecuteReader());
             connection.Close();
 
-            return datatable; 
+            return datatable;
         }
-    }
+}
 }
