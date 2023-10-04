@@ -5,7 +5,7 @@ namespace Services.NHL.Interface
 {
     public interface INhlDraftService
     {
-        Task<List<DraftByYearDto>> DraftByYearRequest(int year);
-        Task<List<DraftByYearDto>> DraftByTeamRequest(int year, string teamName);
+        Task<List<DraftDto>> DraftByYearRequest(int year);
+        Task<List<DraftDto>> DraftByTeamRequest(int year, string teamName);
     }
 }

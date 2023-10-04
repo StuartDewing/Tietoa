@@ -5,22 +5,23 @@ using System.Data.SqlClient;
 
 namespace Services.Sql.UpdateData
 {
-    public class InsertData : IInsertData
+    public class DivisionsSql : IInsertData
     {
         //private readonly IInsertData _InsertData;
         private readonly IConfiguration _configuration;
 
-        private string sqlPopulateTableFromResponse(int divisionId, string divisionName, string divisionConference)
+        public DivisionsSql(IConfiguration configuration)
+        {
+            //_InsertData = InsertData;
+            _configuration = configuration;
+        }
+
+        private string SqlPopulateDivisionsTable(int divisionId, string divisionName, string divisionConference)
         {
             string sqlQuery = $"IF NOT EXISTS (SELECT * FROM NhlDivisions WHERE [divisionsId] = {divisionId}) BEGIN INSERT into NhlDivisions ([divisionsId],[divisionName],[conferenceName]) Values ({divisionId},'{divisionName}','{divisionConference}');END";
             return sqlQuery;
         }
 
-        public InsertData( IConfiguration configuration)
-        {
-            //_InsertData = InsertData;
-            _configuration = configuration;
-        }
 
         public DataTable InsertTable(int divisionId, string divisionName, string divisionConference)
         {
@@ -28,7 +29,7 @@ namespace Services.Sql.UpdateData
 
             SqlConnection connection = new SqlConnection(config);
             connection.Open();
-            string query = sqlPopulateTableFromResponse(divisionId, divisionName, divisionConference);
+            string query = SqlPopulateDivisionsTable(divisionId, divisionName, divisionConference);
             //string query = "Select * FROM ";
             SqlCommand command = new SqlCommand(query, connection);
 

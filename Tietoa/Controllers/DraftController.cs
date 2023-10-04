@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Interface;
+using System.Net.Security;
 using Tietoa.Domain;
 
 namespace Tietoa.Controllers

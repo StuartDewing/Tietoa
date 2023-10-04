@@ -27,9 +27,10 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<INhlScheduleService, NhlScheduleService>();
     x.AddScoped<INhlStandingsService, NhlStandingsService>();
     x.AddScoped<INhlTeamsService, NhlTeamsService>();
+    x.AddScoped<IDraftSql, DraftSql>();
     //SQL
     //x.AddScoped<IGetData, GetData>();
-    x.AddScoped<IInsertData, InsertData>();
+    x.AddScoped<IInsertData, DivisionsSql>();
 });
 
 var app = builder.Build();
