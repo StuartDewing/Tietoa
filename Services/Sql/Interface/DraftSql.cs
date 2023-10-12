@@ -21,7 +21,10 @@ namespace Services.Sql.Interface
 
         private string SqlPopulateDraftTable(int ProspectId, string Round, int Pick, string Team, string FullName, int DraftYear)
         {
-            string sqlQuery = $"IF NOT EXISTS (SELECT * FROM NhlDraft WHERE [ProspectId] = {ProspectId}) BEGIN INSERT into NhlDraft ([ProspectId],[Round],[Pick],[Team],[FullName],[DraftYear]) Values ({ProspectId},'{Round}',{Pick},'{Team}', '{FullName}', {DraftYear});END";
+            FullName = FullName.Replace("'", "&quot;");
+            string sqlQuery = $"IF NOT EXISTS (SELECT * FROM NhlDraft WHERE [ProspectId] = {ProspectId}) " +
+                              $"BEGIN INSERT into NhlDraft ([ProspectId],[Round],[Pick],[Team],[FullName],[DraftYear]) " +
+                              $"Values ({ProspectId},'{Round}',{Pick},'{Team}', '{FullName}', {DraftYear});END";
             return sqlQuery;
         }
 
