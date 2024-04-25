@@ -1,33 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Interface;
+using Services.NHL.Player.Interface;
+using System.Net.Security;
 using Tietoa.Domain;
 
 namespace Tietoa.Controllers
-
 {
     [ApiController]
     [Route("[controller]")]
     public class PlayerController : ControllerBase
     {
         private readonly ILogger<PlayerController> _logger;
-        private readonly INhlPlayerService _NhlPlayerService;
+        private readonly INhlPlayerService _nhlPlayerService;
+        
 
         public PlayerController(ILogger<PlayerController> logger, INhlPlayerService nhlPlayerService)
         {
             _logger = logger;
-            _NhlPlayerService = nhlPlayerService;
+            _nhlPlayerService = nhlPlayerService;
         }
 
         [HttpGet]
-        [Route("PlayerId")]
-        public async Task<IActionResult> Get(int playerId) //8478007 = Elvis Merzlikins
+        [Route("Player")]
+        public async Task<IActionResult> PlayerById(int playerId)
         {
-            if (playerId == 0)
-                return BadRequest($"{ValidationMessages.BadRequestPlayerIdMissing}");
+            //if (playerId <= NhlConstants.FirstDraftYear)
+            //    return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
 
-            var playerDto = await _NhlPlayerService.PlayerRequest(playerId);
+            var playerByIdDto = await _nhlPlayerService.PlayerRequest(playerId);
 
-            return Ok(playerDto);
+            //if (draftByYearsDto.Count() <= 0)
+            //    return NotFound();
+
+            return Ok(playerByIdDto);
         }
+
+        //[HttpGet]
+        //[Route("YearTeam")]
+        //public async Task<IActionResult> DraftByYearTeam(int year, string teamName)
+        //{
+        //    if (year <= NhlConstants.FirstDraftYear)
+        //        return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
+
+        //    var draftByYearTeamsDto = await _nhlPlayerService.DraftByTeamRequest(year, teamName);
+
+        //    if (draftByYearTeamsDto.Count() <= 0)
+        //        return NotFound();
+
+        //    return Ok(draftByYearTeamsDto);
+        //}
     }
 }

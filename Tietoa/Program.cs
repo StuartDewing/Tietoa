@@ -3,9 +3,12 @@ using Services.GetRequest;
 using Services.GetRequest.Interface;
 using Services.NHL;
 using Services.NHL.Interface;
+using Services.NHL.Player;
+using Services.NHL.Player.Interface;
 //using Services.Sql.GetData;
 using Services.Sql.Interface;
 using Services.Sql.UpdateData;
+using Tietoa.Domain.Models.Player;
 //using Services.Sql.UpdateData;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,13 +24,9 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<IGetRequest, GetRequest>();
     //NHL
     x.AddScoped<INhlRequest, NhlRequest>();
-    x.AddScoped<INhlDivisionsService, NhlDivisionsService>();
-    x.AddScoped<INhlDraftService, NhlDraftService>();
-    x.AddScoped<INhlPlayerService, NhlPlayerService>();
-    x.AddScoped<INhlScheduleService, NhlScheduleService>();
-    x.AddScoped<INhlStandingsService, NhlStandingsService>();
-    x.AddScoped<INhlTeamsService, NhlTeamsService>();
+   // x.AddScoped<INhlDraftService, NhldraftService>();
     x.AddScoped<IDraftSql, DraftSql>();
+    x.AddScoped<INhlPlayerService, NhlPlayerService>();
     //SQL
     //x.AddScoped<IGetData, GetData>();
     x.AddScoped<IInsertData, DivisionsSql>();
