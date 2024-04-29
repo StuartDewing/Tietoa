@@ -7,6 +7,5 @@ namespace Services.NHL.Player.Interface
     public interface INhlPlayerService
     {
         Task<List<PlayerDto>> PlayerRequest(int playerId);
-        //Task<List<DraftDto>> DraftByTeamRequest(int year, string teamName);
     }
 }

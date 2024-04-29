@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Tietoa.Domain\Tietoa.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NHL\Player\Validation\" />
+  </ItemGroup>
+
 </Project>

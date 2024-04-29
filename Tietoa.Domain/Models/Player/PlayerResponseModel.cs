@@ -114,7 +114,7 @@ public class RegularSeason
     public int shots { get; set; }
 }
 
-public class Root
+public class PlayerResponseModel
 {
     public int playerId { get; set; }
     public bool isActive { get; set; }

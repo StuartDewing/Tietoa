@@ -13,7 +13,6 @@ namespace Tietoa.Controllers
         private readonly ILogger<PlayerController> _logger;
         private readonly INhlPlayerService _nhlPlayerService;
         
-
         public PlayerController(ILogger<PlayerController> logger, INhlPlayerService nhlPlayerService)
         {
             _logger = logger;
@@ -24,8 +23,9 @@ namespace Tietoa.Controllers
         [Route("Player")]
         public async Task<IActionResult> PlayerById(int playerId)
         {
+            playerId = 8484166;
             //if (playerId <= NhlConstants.FirstDraftYear)
-            //    return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
+               // return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
 
             var playerByIdDto = await _nhlPlayerService.PlayerRequest(playerId);
 
@@ -34,20 +34,5 @@ namespace Tietoa.Controllers
 
             return Ok(playerByIdDto);
         }
-
-        //[HttpGet]
-        //[Route("YearTeam")]
-        //public async Task<IActionResult> DraftByYearTeam(int year, string teamName)
-        //{
-        //    if (year <= NhlConstants.FirstDraftYear)
-        //        return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
-
-        //    var draftByYearTeamsDto = await _nhlPlayerService.DraftByTeamRequest(year, teamName);
-
-        //    if (draftByYearTeamsDto.Count() <= 0)
-        //        return NotFound();
-
-        //    return Ok(draftByYearTeamsDto);
-        //}
     }
 }
