@@ -1,11 +1,10 @@
-﻿using Tietoa.Domain.Models.Draft;
-using Tietoa.Domain.Models.Player;
+﻿using Tietoa.Domain.Models.Player;
 
 namespace Services.NHL.Player.Interface
 
 {
     public interface INhlPlayerService
     {
-        Task<List<PlayerDto>> PlayerRequest(int playerId);
+        Task<List<PlayerDto>> PlayerRequest(PlayerRequestModel request);
     }
 }

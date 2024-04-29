@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Services.NHL.Interface;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
+using Services.NHL.Player;
 using Services.NHL.Player.Interface;
-using System.Net.Security;
-using Tietoa.Domain;
 
 namespace Tietoa.Controllers
 {
@@ -12,25 +12,40 @@ namespace Tietoa.Controllers
     {
         private readonly ILogger<PlayerController> _logger;
         private readonly INhlPlayerService _nhlPlayerService;
+        private IValidator<PlayerRequestModel> _validator;
+
         
-        public PlayerController(ILogger<PlayerController> logger, INhlPlayerService nhlPlayerService)
+        public PlayerController(
+            ILogger<PlayerController> logger, 
+            INhlPlayerService nhlPlayerService,
+            IValidator<PlayerRequestModel> validator )
         {
             _logger = logger;
             _nhlPlayerService = nhlPlayerService;
+            _validator = validator;
         }
 
         [HttpGet]
-        [Route("Player")]
-        public async Task<IActionResult> PlayerById(int playerId)
+        [Route("Player")] //playerId = 8484166;
+        public async Task<IActionResult> PlayerById([FromQuery]PlayerRequestModel request)
         {
-            playerId = 8484166;
-            //if (playerId <= NhlConstants.FirstDraftYear)
-               // return BadRequest($"{ValidationMessages.BadRequestDraftYear} {NhlConstants.FirstDraftYear}");
+            ValidationResult result = await _validator.ValidateAsync(request);
 
-            var playerByIdDto = await _nhlPlayerService.PlayerRequest(playerId);
+            if (!result.IsValid)
+            {
+                result.AddToModelState(this.ModelState);
 
-            //if (draftByYearsDto.Count() <= 0)
-            //    return NotFound();
+                var errorMessages = new List<string>();
+
+                for (int i = 0; i < result.Errors.Count; i++)
+                {
+                    errorMessages.Add(result.Errors[i].ErrorMessage);                
+                }
+
+               return BadRequest(errorMessages);
+            }
+
+            var playerByIdDto = await _nhlPlayerService.PlayerRequest(request);
 
             return Ok(playerByIdDto);
         }

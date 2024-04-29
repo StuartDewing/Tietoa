@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Services.NHL.Interface;
 using Services.NHL.Player.Interface;
-using Services.Sql.Interface;
 using Tietoa.Domain.Models.Player;
 
 namespace Services.NHL.Player
@@ -23,9 +22,9 @@ namespace Services.NHL.Player
             _NhlRequest = nhlRequest;
         }
 
-        public async Task<List<PlayerDto>> PlayerRequest(int playerId)
+        public async Task<List<PlayerDto>> PlayerRequest(PlayerRequestModel request)
         {
-            var response = await nhlPlayerRequest(playerId);
+            var response = await nhlPlayerRequest(request.PlayerId);
             var playerResponseModel = JsonConvert.DeserializeObject<PlayerResponseModel>(response);
 
             List<PlayerDto> playerDto = new List<PlayerDto>();

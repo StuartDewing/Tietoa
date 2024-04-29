@@ -1,10 +1,12 @@
 //using Services.Player;
+using FluentValidation;
 using Services.GetRequest;
 using Services.GetRequest.Interface;
 using Services.NHL;
 using Services.NHL.Interface;
 using Services.NHL.Player;
 using Services.NHL.Player.Interface;
+using Services.NHL.Player.Validation;
 //using Services.Sql.GetData;
 using Services.Sql.Interface;
 using Services.Sql.UpdateData;
@@ -24,12 +26,13 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<IGetRequest, GetRequest>();
     //NHL
     x.AddScoped<INhlRequest, NhlRequest>();
-   // x.AddScoped<INhlDraftService, NhldraftService>();
     x.AddScoped<IDraftSql, DraftSql>();
-    x.AddScoped<INhlPlayerService, NhlPlayerService>();
+
     //SQL
-    //x.AddScoped<IGetData, GetData>();
     x.AddScoped<IInsertData, DivisionsSql>();
+    //Player
+    x.AddScoped<INhlPlayerService, NhlPlayerService>();
+    x.AddScoped<IValidator<PlayerRequestModel>, PlayerValidator>();
 });
 
 var app = builder.Build();
