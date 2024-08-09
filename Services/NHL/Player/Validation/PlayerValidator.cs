@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Tietoa.Domain.Models.Player;
 
 namespace Services.NHL.Player.Validation
 {

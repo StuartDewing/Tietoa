@@ -6,6 +6,7 @@ using Services.NHL;
 using Services.NHL.Interface;
 using Services.NHL.Player;
 using Services.NHL.Player.Interface;
+using Services.NHL.Player.Sql;
 using Services.NHL.Player.Validation;
 //using Services.Sql.GetData;
 using Services.Sql.Interface;
@@ -32,6 +33,7 @@ builder.Host.ConfigureServices(x => {
     x.AddScoped<IInsertData, DivisionsSql>();
     //Player
     x.AddScoped<INhlPlayerService, NhlPlayerService>();
+    x.AddScoped<IAddPlayerToTable, AddPlayerToTable>();
     x.AddScoped<IValidator<PlayerRequestModel>, PlayerValidator>();
 });
 

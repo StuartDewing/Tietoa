@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Player;
 using Services.NHL.Player.Interface;
+using Tietoa.Domain.Models.Player;
 
 namespace Tietoa.Controllers
 {

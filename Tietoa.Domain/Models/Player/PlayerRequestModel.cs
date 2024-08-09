@@ -1,4 +1,4 @@
-﻿namespace Services.NHL.Player
+﻿namespace Tietoa.Domain.Models.Player
 {
     public class PlayerRequestModel
     {
