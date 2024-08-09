@@ -8,14 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tietoa.Domain.Models.Player;
+using Tietoa.Services.Player.Interface;
 
-namespace Services.NHL.Player.Sql
+namespace Tietoa.Services.Player
 {
-    public class AddPlayerToTable : IAddPlayerToTable
+    public class PlayerSqlQuerys : IPlayerSqlQuerys
     {
         private readonly IConfiguration _configuration;
 
-        public AddPlayerToTable(IConfiguration configuration)
+        public PlayerSqlQuerys(IConfiguration configuration)
         {
             _configuration = configuration;
         }

@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Services.NHL.Player;
 using Services.NHL.Player.Interface;
+using Tietoa.Services.Player.Interface;
 using Tietoa.Domain.Models.Player;
 
 namespace Tietoa.Controllers
@@ -12,13 +13,13 @@ namespace Tietoa.Controllers
     public class PlayerController : ControllerBase
     {
         private readonly ILogger<PlayerController> _logger;
-        private readonly INhlPlayerService _nhlPlayerService;
+        private readonly INhlPlayerService222 _nhlPlayerService;
         private IValidator<PlayerRequestModel> _validator;
 
         
         public PlayerController(
-            ILogger<PlayerController> logger, 
-            INhlPlayerService nhlPlayerService,
+            ILogger<PlayerController> logger,
+            INhlPlayerService222 nhlPlayerService,
             IValidator<PlayerRequestModel> validator )
         {
             _logger = logger;
@@ -27,7 +28,7 @@ namespace Tietoa.Controllers
         }
 
         [HttpGet]
-        [Route("Player")] //playerId = 8484166;
+        [Route("Player 8484166")] //playerId = 8484166;
         public async Task<IActionResult> PlayerById([FromQuery]PlayerRequestModel request)
         {
             ValidationResult result = await _validator.ValidateAsync(request);

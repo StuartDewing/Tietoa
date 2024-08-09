@@ -1,4 +1,3 @@
-//using Services.Player;
 using FluentValidation;
 using Services.GetRequest;
 using Services.GetRequest.Interface;
@@ -6,13 +5,11 @@ using Services.NHL;
 using Services.NHL.Interface;
 using Services.NHL.Player;
 using Services.NHL.Player.Interface;
-using Services.NHL.Player.Sql;
-using Services.NHL.Player.Validation;
-//using Services.Sql.GetData;
-using Services.Sql.Interface;
-using Services.Sql.UpdateData;
 using Tietoa.Domain.Models.Player;
-//using Services.Sql.UpdateData;
+using Tietoa.Services.Player;
+using Tietoa.Services.Player.Interface;
+using Tietoa.Validation.Player;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,17 +20,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Host.ConfigureServices(x => {
-    //HTTP
-    x.AddScoped<IGetRequest, GetRequest>();
-    //NHL
+    //Services
     x.AddScoped<INhlRequest, NhlRequest>();
-    x.AddScoped<IDraftSql, DraftSql>();
-
-    //SQL
-    x.AddScoped<IInsertData, DivisionsSql>();
-    //Player
-    x.AddScoped<INhlPlayerService, NhlPlayerService>();
-    x.AddScoped<IAddPlayerToTable, AddPlayerToTable>();
+    x.AddScoped<IGetRequest, GetRequest>();
+    //Tietoa.Services
+    x.AddScoped<INhlPlayerService222, NhlPlayerService>();
+    x.AddScoped<IPlayerSqlQuerys, PlayerSqlQuerys>();
+    //Tietoa.Validation
     x.AddScoped<IValidator<PlayerRequestModel>, PlayerValidator>();
 });
 

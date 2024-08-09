@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using Tietoa.Domain.Models.Player;
 
-namespace Services.NHL.Player.Interface
+namespace Tietoa.Services.Player.Interface
 {
-    public interface IAddPlayerToTable
+    public interface IPlayerSqlQuerys
     {
         DataTable InsertToNhlPlayerTable(PlayerResponseModel response);
     }

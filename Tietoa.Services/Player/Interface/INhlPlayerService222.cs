@@ -3,7 +3,7 @@
 namespace Services.NHL.Player.Interface
 
 {
-    public interface INhlPlayerService
+    public interface INhlPlayerService222
     {
         Task<List<PlayerDto>> PlayerRequest(PlayerRequestModel request);
     }
