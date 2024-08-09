@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
-using Services.NHL.Interface;
 using Services.NHL.Player.Interface;
+using Tietoa.Services.Player.Interface;
 using Tietoa.Domain.Models.Player;
+using Services.NHL.Interface;
 
 namespace Services.NHL.Player
 
 {
-    public class NhlPlayerService : INhlPlayerService
+    public class NhlPlayerService : INhlPlayerService222
     {
         private readonly INhlRequest _NhlRequest;
-        private readonly IAddPlayerToTable _addPlayerToTable;
+        private readonly IPlayerSqlQuerys _addPlayerToTable;
 
-        public NhlPlayerService(INhlRequest nhlRequest, IAddPlayerToTable addPlayerToTable)
+        public NhlPlayerService(INhlRequest nhlRequest, IPlayerSqlQuerys addPlayerToTable)
         {
             _NhlRequest = nhlRequest;
             _addPlayerToTable = addPlayerToTable;

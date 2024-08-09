@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Tietoa.Domain.Models.Player;
 
-namespace Services.NHL.Player.Validation
+namespace Tietoa.Validation.Player
 {
     public class PlayerValidator : AbstractValidator<PlayerRequestModel>
     {

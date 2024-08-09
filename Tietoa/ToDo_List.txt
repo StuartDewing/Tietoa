@@ -1,0 +1,5 @@
+﻿#1: Unit Tests NHlPlayer
+#2: Document NHL API / Links to Source Material
+#3: Create Postman Collection
+#4: Compare data added to database other than PlayerId - (Adam Fantilli Number change not added to Database on current PlayerId Check)
+#5: Data Stat Query - SQL or C# ??? Need to reasearch and better understand the coding standard
